@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Main from '../template/Main'
 import axios from 'axios'
+import CurrencyInput from 'react-currency-input'
 
 const headerProps = {
     icon: 'users',
@@ -112,12 +113,14 @@ export default class UserCrud extends Component {
                    <div className="col-12 col-md-6">
                        <div className="form-group">
                            <label>Renda Familiar</label>
-                           <input type="number" className="form-control"
-                                step=".01"
+                           <CurrencyInput className="form-control"
+                                prefix="R$ "
+                                precision="2"
+                                decimalSeparator="."
                                 min="0"
                                 name="renda" 
                                 value={this.state.user.renda}
-                                onChange={e => this.updateField(e)}
+                                onChangeEvent={e => this.updateField(e)}
                                 placeholder="Digite a renda familiar" required />
                        </div>
                    </div>
