@@ -1,12 +1,9 @@
 {
-    "users": [{
-        "id": 1,
-        "name": "Andrey Carvalho",
-        "email": "acarvaho@tempus.com.br"
-    }, {
-        "id": 2,
-        "name": "Maria Julia da Silva",
-        "email": "mjds@tempus.com.br"
-
-    }]
+  "users": [
+    {
+      "id": 1,
+      "name": "Andrey Carvalho",
+      "cpf": "72489435094"
+    }
+  ]
 }

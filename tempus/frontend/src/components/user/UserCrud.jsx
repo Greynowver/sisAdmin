@@ -20,6 +20,12 @@ export default class UserCrud extends Component {
 
     state = { ...inicialState }
 
+    componentWillMount(){
+        axios(baseUrl).then(resp => {
+            this.setState({ list: resp.data })
+        })
+    }
+
     clear() {
         this.setState({ user: inicialState.user})
     }
@@ -55,7 +61,7 @@ export default class UserCrud extends Component {
 
         today =  dd + '/' + mm + '/' + yyyy
         return today
-    }45
+    }
 
     renderForm() {
 
