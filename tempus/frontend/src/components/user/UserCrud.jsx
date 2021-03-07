@@ -108,6 +108,20 @@ export default class UserCrud extends Component {
                         </div>
                    </div>
                </div>
+               <div className="row">
+                   <div className="col-12 col-md-6">
+                       <div className="form-group">
+                           <label>Renda Familiar</label>
+                           <input type="number" className="form-control"
+                                step=".01"
+                                min="0"
+                                name="renda" 
+                                value={this.state.user.renda}
+                                onChange={e => this.updateField(e)}
+                                placeholder="Digite a renda familiar" required />
+                       </div>
+                   </div>
+               </div>
                <hr />
                <div className="row">
                    <div className="col-12 d-flex justify-content-end">
