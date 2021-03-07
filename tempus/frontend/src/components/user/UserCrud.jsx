@@ -14,6 +14,7 @@ const inicialState = {
     list: []
 }
 
+
 export default class UserCrud extends Component {
 
     state = { ...inicialState }
@@ -45,7 +46,18 @@ export default class UserCrud extends Component {
         this.setState({ user })
     }
 
+    getDate() {
+        var today = new Date()
+        var dd = String(today.getDate()).padStart(2, '0')
+        var mm = String(today.getMonth() + 1).padStart(2, '0')
+        var yyyy = String(today.getFullYear())
+
+        today =  dd + '/' + mm + '/' + yyyy
+        return today
+    }45
+
     renderForm() {
+
        return (
            <div className="form">
                <div className="row">
@@ -54,6 +66,7 @@ export default class UserCrud extends Component {
                           <label>Nome</label>
                           <input type="text" className="form-control"
                            name="name"
+                           maxLength="150"
                            value={this.state.user.name}
                            onChange={e => this.updateField(e)}
                            placeholder="Digite o nome" />
@@ -64,10 +77,11 @@ export default class UserCrud extends Component {
                        <div className="form-group">
                           <label>CPF</label>
                           <input type="text" className="form-control"
+                            maxLength="11"
                             name="cpf"
                             value={this.state.user.cpf}
                             onChange={e => this.updateField(e)}
-                            placeholder="Digite o e-mail" />
+                            placeholder="Digite o CPF" />
                        </div>
                    </div>
                </div>
@@ -76,10 +90,21 @@ export default class UserCrud extends Component {
                         <div className="form-group">
                             <label>Data de Nascimento</label>
                             <input type="date" className="form-control"
+                                //max= {}
                                 name="nascimento"
-                                value={this.state.user.nascimento}
+                                value={this.state.user.nascimento }
                                 onChange={e => this.updateField(e)}
                                 placeholder="Digite a data de nascimento" />
+                        </div>
+                   </div>
+                   <div className="col-12 col-md-6">
+                        <div className="form-group">
+                            <label>Data do Cadastro</label>
+                            <input type="text" className="form-control"
+                                readOnly
+                                name="cadastro"
+                                value={this.state.user.cadastro = this.getDate()}
+                                placeholder={this.getDate} />
                         </div>
                    </div>
                </div>
