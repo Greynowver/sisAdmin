@@ -63,6 +63,57 @@ export default class UserCrud extends Component {
         return today
     }
 
+    validarNome() {
+        var strCpf = document.getElementById('cpf1').value;
+        if (!verificarCPF(strCpf)) {
+            alert("CPF inválido");
+            return;
+        }
+        document.getElementById('frm').submit();
+    }
+
+    verificarCPF(strCpf) {
+        if (!/[0-9]{11}/.test(strCpf)) return false;
+        if (strCpf === "00000000000") return false;
+    
+        var soma = 0;
+    
+        for (var i = 1; i <= 9; i++) {
+            soma += parseInt(strCpf.substring(i - 1, i)) * (11 - i);
+        }
+    
+        var resto = soma % 11;
+    
+        if (resto === 10 || resto === 11 || resto < 2) {
+            resto = 0;
+        } else {
+            resto = 11 - resto;
+        }
+    
+        if (resto !== parseInt(strCpf.substring(9, 10))) {
+            return false;
+        }
+    
+        soma = 0;
+    
+        for (var i = 1; i <= 10; i++) {
+            soma += parseInt(strCpf.substring(i - 1, i)) * (12 - i);
+        }
+        resto = soma % 11;
+    
+        if (resto === 10 || resto === 11 || resto < 2) {
+            resto = 0;
+        } else {
+            resto = 11 - resto;
+        }
+    
+        if (resto !== parseInt(strCpf.substring(10, 11))) {
+            return false;
+        }
+    
+        return true;
+    }
+
     renderForm() {
 
        return (
@@ -84,10 +135,12 @@ export default class UserCrud extends Component {
                        <div className="form-group">
                           <label>CPF</label>
                           <input type="text" className="form-control"
+                            id="cpf1"
                             maxLength="11"
                             name="cpf"
                             value={this.state.user.cpf}
                             onChange={e => this.updateField(e)}
+                            onBlur={e => this.validarNome(e)}
                             placeholder="Digite o CPF" />
                        </div>
                    </div>
