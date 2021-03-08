@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Main from '../template/Main'
 import axios from 'axios'
+import CurrencyInput from 'react-currency-input'
 
 const headerProps = {
     icon: 'list',
@@ -32,6 +33,27 @@ export default class UserList extends Component {
         const list = this.state.list.filter(u => u.id !== user.id)
         if (add) list.unshift(user)
         return list
+    }
+
+    updateField(event) {
+        const user = { ...this.state.user }
+        user[event.target.name] = event.target.value
+        this.setState({ user })
+    }
+
+    clear() {
+        this.setState({ user: inicialState.user})
+    }
+
+    save() {
+        const user = this.state.user
+        const method = user.id ? 'put' : 'post'
+        const url = user.id ? `${baseUrl}/${user.id}` : baseUrl
+        axios[method](url, user)
+            .then(resp => {
+                const list = this.getUpdatedList(resp.data)
+                this.setState({ user: inicialState.user, list })
+            })
     }
 
     remove(user) {
@@ -83,7 +105,58 @@ export default class UserList extends Component {
         return(
             <Main {...headerProps}>
                 {this.renderTable()}
+                {this.renderForm()}
             </Main>
+        )
+    }
+
+    renderForm() {
+
+        return (
+            <div className="form">
+                <div className="row">
+                    <div className="col-12 col-md-6">
+                        <div className="form-group">
+                           <label>Nome</label>
+                           <input type="text" className="form-control"
+                            name="name"
+                            maxLength="150"
+                            value={this.state.user.name}
+                            onChange={e => this.updateField(e)}
+                            placeholder="Digite o nome" />
+                        </div>
+                    </div>
+ 
+                    <div className="col-12 col-md-6">
+                       <div className="form-group">
+                           <label>Renda Familiar</label>
+                           <CurrencyInput className="form-control"
+                                prefix="R$ "
+                                precision="2"
+                                decimalSeparator="."
+                                min="0"
+                                name="renda" 
+                                value={this.state.user.renda}
+                                onChangeEvent={e => this.updateField(e)}
+                                placeholder="Digite a renda familiar" required />
+                       </div>
+                   </div>
+                </div>
+                <hr />
+               <div className="row">
+                   <div className="col-12 d-flex justify-content-end">
+                       <button className="btn btn-primary"
+                            onClick={ e=> this.save(e)}>
+                            Salvar 
+                       </button>
+
+                        <button className="btn btn-secundary ml-2"
+                            onClick={e => this.clear(e)}>
+                            Cancelar 
+                        </button>
+                   </div>
+               </div>
+            </div>
         )
     }
 }

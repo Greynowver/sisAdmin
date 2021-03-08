@@ -3,7 +3,16 @@
     {
       "id": 1,
       "name": "Andrey Carvalho",
-      "cpf": "72489435094"
+      "cpf": "72489435094",
+      "renda": "R$ 800.00"
+    },
+    {
+      "name": "Tatiane Guerra",
+      "cpf": "99294026086",
+      "nascimento": "1996-06-12",
+      "cadastro": "08/03/2021",
+      "renda": "R$ 6,000.00",
+      "id": 2
     }
   ]
 }
