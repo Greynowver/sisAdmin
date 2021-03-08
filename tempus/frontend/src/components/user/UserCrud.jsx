@@ -41,6 +41,18 @@ export default class UserCrud extends Component {
             })
     }
 
+    getCPF() {
+        var newCPF = document.getElementById('cpf1').value
+        const listCPF = this.state.list
+        for(var i=0; i<listCPF.length; i++){
+            if(listCPF[i].cpf === newCPF){
+                alert("CPF já cadastrado")
+                return
+            }
+        }
+
+    }
+
     getUpdatedList(user) {
         const list = this.state.list.filter(u => u.id !== user.id)
         list.unshift(user)
@@ -64,54 +76,54 @@ export default class UserCrud extends Component {
     }
 
     validarNome() {
-        var strCpf = document.getElementById('cpf1').value;
-        if (!verificarCPF(strCpf)) {
-            alert("CPF inválido");
-            return;
+        var strCpf = document.getElementById('cpf1').value
+        if (!this.verificarCPF(strCpf)) {
+            alert("CPF inválido")
+            return
         }
-        document.getElementById('frm').submit();
+        document.getElementById('frm')
     }
 
     verificarCPF(strCpf) {
-        if (!/[0-9]{11}/.test(strCpf)) return false;
-        if (strCpf === "00000000000") return false;
+        if (!/[0-9]{11}/.test(strCpf)) return false
+        if (strCpf === "00000000000") return false
     
-        var soma = 0;
+        var soma = 0
     
         for (var i = 1; i <= 9; i++) {
-            soma += parseInt(strCpf.substring(i - 1, i)) * (11 - i);
+            soma += parseInt(strCpf.substring(i - 1, i)) * (11 - i)
         }
     
-        var resto = soma % 11;
+        var resto = soma % 11
     
         if (resto === 10 || resto === 11 || resto < 2) {
-            resto = 0;
+            resto = 0
         } else {
-            resto = 11 - resto;
+            resto = 11 - resto
         }
     
         if (resto !== parseInt(strCpf.substring(9, 10))) {
-            return false;
+            return false
         }
     
-        soma = 0;
+        soma = 0
     
         for (var i = 1; i <= 10; i++) {
             soma += parseInt(strCpf.substring(i - 1, i)) * (12 - i);
         }
-        resto = soma % 11;
+        resto = soma % 11
     
         if (resto === 10 || resto === 11 || resto < 2) {
-            resto = 0;
+            resto = 0
         } else {
-            resto = 11 - resto;
+            resto = 11 - resto
         }
     
         if (resto !== parseInt(strCpf.substring(10, 11))) {
-            return false;
+            return false
         }
     
-        return true;
+        return true
     }
 
     renderForm() {
@@ -140,7 +152,8 @@ export default class UserCrud extends Component {
                             name="cpf"
                             value={this.state.user.cpf}
                             onChange={e => this.updateField(e)}
-                            onBlur={e => this.validarNome(e)}
+                            onBlur={e => this.validarNome(e),
+                               e => this.getCPF()}
                             placeholder="Digite o CPF" />
                        </div>
                    </div>
