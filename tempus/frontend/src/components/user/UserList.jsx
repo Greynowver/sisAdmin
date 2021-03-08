@@ -82,22 +82,7 @@ export default class UserList extends Component {
 
     renderRows() {
         return this.state.list.map(user => {
-            return (
-                <tr key={user.id}>
-                    <td>{user.name}</td>
-                    <td>{user.renda}</td>
-                    <td>
-                        <button className="btn btn-warning"
-                            onClick={() => this.load(user)}>
-                            <i className="fa fa-pencil"></i>
-                        </button>
-                        <button className="btn btn-danger ml-2"
-                            onClick={() => this.remove(user)}>
-                            <i className="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>    
-            )
+           return this.renderBadge(user)
         })
     }
 
@@ -111,7 +96,70 @@ export default class UserList extends Component {
     }
 
     renderBadge(user) {
-
+        if(user.classe === "A"){
+            return (
+                <tr key={user.id}>
+                    <td>{user.name}</td>
+                    <td style={{ backgroundColor: "red",
+                     borderRadius: "15px",
+                     textAlign: "center",
+                      }}>
+                    {user.renda}</td>
+                    <td>
+                        <button className="btn btn-warning"
+                            onClick={() => this.load(user)}>
+                            <i className="fa fa-pencil"></i>
+                        </button>
+                        <button className="btn btn-danger ml-2"
+                            onClick={() => this.remove(user)}>
+                            <i className="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>    
+            )
+        }else if(user.classe === "B"){
+            return (
+                <tr key={user.id}>
+                    <td>{user.name}</td>
+                    <td style={{ backgroundColor: "yellow",
+                     borderRadius: "15px",
+                     textAlign: "center",
+                      }}>
+                    {user.renda}</td>
+                    <td>
+                        <button className="btn btn-warning"
+                            onClick={() => this.load(user)}>
+                            <i className="fa fa-pencil"></i>
+                        </button>
+                        <button className="btn btn-danger ml-2"
+                            onClick={() => this.remove(user)}>
+                            <i className="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>    
+            )
+        }else if(user.classe === "C"){
+            return (
+                <tr key={user.id}>
+                    <td>{user.name}</td>
+                    <td style={{ backgroundColor: "green",
+                     borderRadius: "15px",
+                     textAlign: "center",
+                      }}>
+                    {user.renda}</td>
+                    <td>
+                        <button className="btn btn-warning"
+                            onClick={() => this.load(user)}>
+                            <i className="fa fa-pencil"></i>
+                        </button>
+                        <button className="btn btn-danger ml-2"
+                            onClick={() => this.remove(user)}>
+                            <i className="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>    
+            )
+        }    
     }
 
     setClass() {
