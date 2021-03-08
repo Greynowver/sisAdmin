@@ -11,7 +11,7 @@ const headerProps = {
 
 const baseUrl = 'http://localhost:3001/users'
 const inicialState = {
-    user: { name: '', cpf: '', nascimento: '', cadastro: '', renda: ''},
+    user: { name: '', cpf: '', nascimento: '', cadastro: '', renda: '', classe: ''},
     list: []
 }
 
@@ -75,12 +75,29 @@ export default class UserCrud extends Component {
         return today
     }
 
+    maxCalendar(){
+        var calendar = new Date()
+        var dd = calendar.getDate()
+        var mm = calendar.getMonth()+1
+        var yyyy = calendar.getFullYear()
+            if(dd<10){
+                dd='0'+dd
+            } 
+            if(mm<10){
+                mm='0'+mm
+            } 
+
+        calendar = yyyy+'-'+mm+'-'+dd;
+        document.getElementById("datefield").setAttribute("max", calendar);
+    }
+
     validarNome() {
         var strCpf = document.getElementById('cpf1').value
         if (!this.verificarCPF(strCpf)) {
             alert("CPF inválido")
             return
         }
+        this.getCPF()
         document.getElementById('frm')
     }
 
@@ -152,8 +169,7 @@ export default class UserCrud extends Component {
                             name="cpf"
                             value={this.state.user.cpf}
                             onChange={e => this.updateField(e)}
-                            onBlur={e => this.validarNome(e),
-                               e => this.getCPF()}
+                            onBlur={e => this.validarNome(e)}
                             placeholder="Digite o CPF" />
                        </div>
                    </div>
@@ -163,9 +179,11 @@ export default class UserCrud extends Component {
                         <div className="form-group">
                             <label>Data de Nascimento</label>
                             <input type="date" className="form-control"
-                                //max= {}
+                                id="datefield"
+                                max=""
                                 name="nascimento"
                                 value={this.state.user.nascimento }
+                                onClick={e => this.maxCalendar(e)}
                                 onChange={e => this.updateField(e)}
                                 placeholder="Digite a data de nascimento" />
                         </div>
@@ -193,6 +211,7 @@ export default class UserCrud extends Component {
                                 name="renda" 
                                 value={this.state.user.renda}
                                 onChangeEvent={e => this.updateField(e)}
+                                onBlur={e => this.setClass()}
                                 placeholder="Digite a renda familiar" required />
                        </div>
                    </div>
@@ -213,6 +232,18 @@ export default class UserCrud extends Component {
                </div>
            </div>
        ) 
+    }
+
+    setClass() {
+        const userClass = this.state.user
+        const rendaFormatada = userClass.renda.replace(/([^\d])+/gim, '')
+        if(rendaFormatada <= 98000 || ''){
+            this.state.user.classe = "A"
+        }else if( rendaFormatada > 98000  &&  rendaFormatada <= 250000){
+            this.state.user.classe = "B"
+        }else if(rendaFormatada > 250000 ){
+            this.state.user.classe = "C"
+        }
     }
 
     render() {

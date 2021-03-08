@@ -4,38 +4,43 @@
       "id": 1,
       "name": "Andrey Carvalho",
       "cpf": "72489435094",
-      "renda": "R$ 800.00"
+      "renda": "R$ 1,500.00",
+      "classe": "B"
     },
     {
       "name": "Tatiane Guerra",
       "cpf": "99294026086",
       "nascimento": "1996-06-12",
       "cadastro": "08/03/2021",
-      "renda": "R$ 6,000.00",
-      "id": 2
+      "renda": "R$ 6,000.01",
+      "id": 2,
+      "classe": "C"
     },
     {
       "name": "Diego Marcondes",
       "cpf": "58545407033",
       "nascimento": "1993-07-23",
       "cadastro": "08/03/2021",
-      "renda": "R$ 300.00",
-      "id": 3
+      "renda": "R$ 350.00",
+      "id": 3,
+      "classe": "A"
     },
     {
-      "name": "Julia Souza",
+      "name": "Julia Souza nçjaa",
       "cpf": "22130117023",
       "nascimento": "1995-12-21",
       "cadastro": "08/03/2021",
-      "renda": "R$ 750.00",
-      "id": 4
+      "renda": "R$ 2,000.00",
+      "id": 4,
+      "classe": "B"
     },
     {
-      "name": "Gaspar Dourado",
-      "cpf": "09712912094",
-      "nascimento": "1989-02-15",
+      "name": "Joaquim Bianchi",
+      "cpf": "55339045064",
+      "nascimento": "1981-07-03",
       "cadastro": "08/03/2021",
-      "renda": "",
+      "renda": "R$ 950.00",
+      "classe": "A",
       "id": 5
     }
   ]

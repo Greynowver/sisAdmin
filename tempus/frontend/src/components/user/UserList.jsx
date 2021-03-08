@@ -110,6 +110,22 @@ export default class UserList extends Component {
         )
     }
 
+    renderBadge(user) {
+
+    }
+
+    setClass() {
+        const userClass = this.state.user
+        const rendaFormatada = userClass.renda.replace(/([^\d])+/gim, '')
+        if(rendaFormatada <= 98000 || ''){
+            this.state.user.classe = "A"
+        }else if( rendaFormatada > 98000  &&  rendaFormatada <= 250000){
+            this.state.user.classe = "B"
+        }else if(rendaFormatada > 250000 ){
+            this.state.user.classe = "C"
+        }
+    }
+
     renderForm() {
 
         return (
@@ -138,6 +154,7 @@ export default class UserList extends Component {
                                 name="renda" 
                                 value={this.state.user.renda}
                                 onChangeEvent={e => this.updateField(e)}
+                                onBlur={e => this.setClass()}
                                 placeholder="Digite a renda familiar" required />
                        </div>
                    </div>
